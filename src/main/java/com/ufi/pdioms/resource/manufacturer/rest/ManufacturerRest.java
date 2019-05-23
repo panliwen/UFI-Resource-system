@@ -32,7 +32,7 @@ public class ManufacturerRest
         manufacturerService.addManufacturerInfo(manufacturer,result);
        return result;
     }
-
+    //根据id删除厂家信息
     @DeleteMapping("/manufacturer/{manufacturerId}")
     public GeneralResult deleteManufacturer(@PathVariable("manufacturerId") long manufacturerId)
     {
@@ -41,16 +41,19 @@ public class ManufacturerRest
        return result;
 
     }
-
+    //根据id修改厂家信息
     @PutMapping("/manufacturer/{manufacturerId}/edit")
-    public GeneralResult updateManufacturerInfo(@Valid @PathVariable Manufacturer manufacturer,
+    public GeneralResult updateManufacturerInfo(@Valid @RequestBody Manufacturer manufacturer,
                                                 @PathVariable("manufacturerId") long manufacturerId
                                                 )
     {
-        System.out.println("测试");
-       return null;
+        LOGGER.info("update manufacturer info param:{}",JsonUtils.obj2json(manufacturer));
+        GeneralResult result = new GeneralResult();
+        manufacturer.setId(manufacturerId);
+        manufacturerService.updateManufacturerInfo(manufacturer,result);
+       return result;
     }
-
+    //获得厂家信息列表
     @GetMapping("/manufacturer")
     public GeneralResult getManufacturerInfo(  @RequestParam(value="pageNo", required=false, defaultValue="1") Integer pageNo,
                                            @RequestParam(value="pageSize", required=false, defaultValue="20") Integer pageSize,

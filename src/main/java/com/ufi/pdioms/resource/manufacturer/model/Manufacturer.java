@@ -15,7 +15,6 @@ public class Manufacturer implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String manufacturer;
     private String remarks;
     @Column(name = "isDelete")

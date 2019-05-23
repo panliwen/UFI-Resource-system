@@ -31,4 +31,11 @@ public interface ManufacturerService
      * @param result  结果说明
      */
     void deleteManufacturerInfo(long manufacturerId, GeneralResult result);
+
+    /**
+     * 根据id修改厂家信息
+     * @param manufacturer  厂家修改对象信息
+     * @param result  结果说明
+     */
+    void updateManufacturerInfo(Manufacturer manufacturer, GeneralResult result);
 }

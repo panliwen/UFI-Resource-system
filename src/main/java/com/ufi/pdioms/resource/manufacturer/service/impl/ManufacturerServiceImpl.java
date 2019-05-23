@@ -20,7 +20,7 @@ import java.util.List;
  * 厂家业务层实现类
  */
 @Service
-public class ManufacturerServcieImpl implements ManufacturerService
+public class ManufacturerServiceImpl implements ManufacturerService
 {
 
     @Autowired
@@ -75,7 +75,7 @@ public class ManufacturerServcieImpl implements ManufacturerService
             }
         }
         manufacturerDao.insert(manufacturer);
-        return;
+        result.setResultStatus(true);
     }
 
     /**
@@ -89,5 +89,29 @@ public class ManufacturerServcieImpl implements ManufacturerService
         manufacturer.setId(manufacturerId);
         manufacturer.setIsDelete(1);
         manufacturerDao.updateByPrimaryKeySelective(manufacturer);
+        result.setResultStatus(true);
+    }
+
+    /**
+     * 根据id修改厂家信息
+     *
+     * @param manufacturer 厂家修改对象信息
+     * @param result       结果说明
+     */
+    @Transactional
+    public void updateManufacturerInfo(Manufacturer manufacturer, GeneralResult result)
+    {
+        //判断用户填写名字是否已存在！
+        Example example = new Example(Manufacturer.class);
+        example.createCriteria().andEqualTo("isDelete",0);
+        List<Manufacturer> manufacturers = manufacturerDao.selectByExample(example);
+        for (Manufacturer manufacturer1 : manufacturers) {
+            if (manufacturer.getManufacturer().equals(manufacturer1.getManufacturer())){
+                result.setErr(ErrorCode.NAME_AND_EXIST);
+                return;
+            }
+        }
+        manufacturerDao.updateByPrimaryKeySelective(manufacturer);
+       result.setResultStatus(true);
     }
 }

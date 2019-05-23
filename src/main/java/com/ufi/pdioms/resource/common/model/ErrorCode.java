@@ -21,8 +21,9 @@ public enum ErrorCode
 
 		DEVICE_NOT_EXIST("30301", "该设备不存在"),
 		DEVICE_NUMBER_EXIST("30302", "该设备编号已存在"),
+		DEVICE_SN_NUMBER_EXIST("30303", "该设备SN已存在"),
 
-		NAME_AND_EXIST("30401","名称已存在！请更换！"),
+		NAME_AND_EXIST("30401","名称已存在！请更换其它名字！"),
 		NAME_NOT_EXIST("30402","名称不存在！请更换！")
 
 
