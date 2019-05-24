@@ -1,13 +1,13 @@
-package com.ufi.pdioms.resource.battery.dao;
+package com.ufi.pdioms.resource.parts.dao;
 
-import com.ufi.pdioms.resource.battery.model.Battery;
+import com.ufi.pdioms.resource.parts.model.Parts;
 import tk.mybatis.mapper.common.Mapper;
 
 /**
- * 电池dao层接口
+ * 配件dao层接口
  */
 @org.apache.ibatis.annotations.Mapper
-public interface BatteryDao extends Mapper<Battery>
+public interface PartsDao extends Mapper<Parts>
 {
 
     Integer findNumberCount(String search);
