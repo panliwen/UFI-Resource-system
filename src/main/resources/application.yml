@@ -22,7 +22,7 @@ spring:
     timeout: 0
 logging:
   level:
-    com.seebon.delivery.dao: DEBUG
+    com.ufi.pdioms.resource.dao: DEBUG
 
 mybatis:
   type-aliases-package: com.ufi.pdioms.resource.rest.*  #这个是扫描实体对象的
