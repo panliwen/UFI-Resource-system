@@ -12,6 +12,7 @@ import com.ufi.pdioms.resource.model.dao.ModelDao;
 import com.ufi.pdioms.resource.model.model.Model;
 import com.ufi.pdioms.resource.purchase.dao.PurchaseDao;
 import com.ufi.pdioms.resource.purchase.dao.PurchaseDetailsDao;
+import com.ufi.pdioms.resource.purchase.model.Purchase;
 import com.ufi.pdioms.resource.purchase.model.PurchaseDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -160,7 +161,19 @@ public class DroneServiceImpl implements DroneService
      * @return 返回查询结果集
      */
     @Override
-    public Drone getDroneDetails(Long droneId) {
-        return droneDao.selectByPrimaryKey(droneId);
+    public Drone getDroneDetails(Long droneId)
+    {
+        Drone drone = droneDao.selectByPrimaryKey(droneId); //设备无人机信息
+        Example example = new Example(PurchaseDetails.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("sn",drone.getSn());
+        List<PurchaseDetails> purchaseDetails =  purchaseDetailsDao.selectByExample(example); //获取采购详情中信息，拿父if值
+        long getId=0;
+        for (PurchaseDetails purchaseDetail : purchaseDetails) {
+            getId = purchaseDetail.getParentId();
+        }
+        Purchase purchase = purchaseDao.selectByPrimaryKey(getId); //获得采购记录信息
+        drone.setPurchase(purchase);
+        return drone ;
     }
 }

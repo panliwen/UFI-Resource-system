@@ -1,5 +1,6 @@
 package com.ufi.pdioms.resource.parts.model;
 
+import com.ufi.pdioms.resource.purchase.model.Purchase;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -27,6 +28,16 @@ public class Parts implements Serializable
 
     @Column(name = "isDelete")
     private Integer isDelete;
+
+    private Purchase purchase;
+
+    public Purchase getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
+    }
 
     public Long getId() {
         return id;
@@ -122,6 +133,7 @@ public class Parts implements Serializable
                 ", manufacturer='" + manufacturer + '\'' +
                 ", status=" + status +
                 ", isDelete=" + isDelete +
+                ", purchase=" + purchase +
                 '}';
     }
 }

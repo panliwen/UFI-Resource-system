@@ -5,9 +5,15 @@ import com.github.pagehelper.PageInfo;
 import com.ufi.pdioms.resource.common.model.ErrorCode;
 import com.ufi.pdioms.resource.common.model.GeneralResult;
 import com.ufi.pdioms.resource.common.model.PageResult;
+import com.ufi.pdioms.resource.model.dao.ModelDao;
+import com.ufi.pdioms.resource.model.model.Model;
 import com.ufi.pdioms.resource.parts.dao.PartsDao;
 import com.ufi.pdioms.resource.parts.model.Parts;
 import com.ufi.pdioms.resource.parts.service.PartsService;
+import com.ufi.pdioms.resource.purchase.dao.PurchaseDao;
+import com.ufi.pdioms.resource.purchase.dao.PurchaseDetailsDao;
+import com.ufi.pdioms.resource.purchase.model.Purchase;
+import com.ufi.pdioms.resource.purchase.model.PurchaseDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +31,13 @@ public class PartsServiceImpl implements PartsService
 
     @Autowired
     private PartsDao partsDao;
+    @Autowired
+    private ModelDao modelDao; //设备型号
+    @Autowired
+    private PurchaseDao purchaseDao; //采购信息
+    @Autowired
+    private PurchaseDetailsDao purchaseDetailsDao; //采购详情信息
+
 
     /**
      * 获得设备配件所有列表信息
@@ -84,8 +97,25 @@ public class PartsServiceImpl implements PartsService
     @Transactional
     public void addPartsInfo(Parts parts, GeneralResult result)
     {
-       
-        partsDao.insertSelective(parts);
+        //通过型号查询厂家信息
+        List<Model> modelList = modelDao.selectAll();
+        for (Model model : modelList)
+        {
+            if (model.getModel().equals(parts.getModel())) parts.setManufacturer(model.getManufacturer());
+        }
+        partsDao.insertSelective(parts); //插入配件数据信息
+        purchaseDao.insertSelective(parts.getPurchase());//插入采购数据信息
+
+        //采购详情的信息
+        PurchaseDetails purchaseDetails= new PurchaseDetails();
+        purchaseDetails.setParentId(parts.getPurchase().getId()); //采购信息id作为详情信息父id值
+        purchaseDetails.setNumber(parts.getNumber());
+        purchaseDetails.setModel(parts.getModel());
+        purchaseDetails.setCategory("配件");
+        purchaseDetails.setSn(parts.getSn());
+
+        purchaseDetailsDao.insertSelective(purchaseDetails);
+
         result.setResultStatus(true);
     }
 
@@ -133,7 +163,19 @@ public class PartsServiceImpl implements PartsService
      * @return 返回查询结果集
      */
     @Override
-    public Parts getPartsDetails(Long partsId) {
-        return partsDao.selectByPrimaryKey(partsId);
+    public Parts getPartsDetails(Long partsId)
+    {
+        Parts parts = partsDao.selectByPrimaryKey(partsId); //设备无人机信息
+        Example example = new Example(PurchaseDetails.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("sn",parts.getSn());
+        List<PurchaseDetails> purchaseDetails =  purchaseDetailsDao.selectByExample(example); //获取采购详情中信息，拿父if值
+        long getId=0;
+        for (PurchaseDetails purchaseDetail : purchaseDetails) {
+            getId = purchaseDetail.getParentId();
+        }
+        Purchase purchase = purchaseDao.selectByPrimaryKey(getId); //获得采购记录信息
+        parts.setPurchase(purchase);
+        return parts ;
     }
 }
