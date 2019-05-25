@@ -85,7 +85,7 @@ public class BatteryServiceImpl implements BatteryService
     public void addBatteryInfo(Battery battery, GeneralResult result)
     {
        
-        batteryDao.insert(battery);
+        batteryDao.insertSelective(battery);
         result.setResultStatus(true);
     }
 

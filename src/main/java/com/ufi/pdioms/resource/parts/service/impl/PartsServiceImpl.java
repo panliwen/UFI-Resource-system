@@ -85,7 +85,7 @@ public class PartsServiceImpl implements PartsService
     public void addPartsInfo(Parts parts, GeneralResult result)
     {
        
-        partsDao.insert(parts);
+        partsDao.insertSelective(parts);
         result.setResultStatus(true);
     }
 

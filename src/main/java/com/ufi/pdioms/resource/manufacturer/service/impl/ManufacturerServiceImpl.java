@@ -74,7 +74,7 @@ public class ManufacturerServiceImpl implements ManufacturerService
                 return;
             }
         }
-        manufacturerDao.insert(manufacturer);
+        manufacturerDao.insertSelective(manufacturer);
         result.setResultStatus(true);
     }
 

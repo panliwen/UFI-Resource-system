@@ -87,7 +87,7 @@ public class SupplierServiceImpl implements SupplierService {
                 return;
             }
         }
-        supplierDao.insert(supplier);
+        supplierDao.insertSelective(supplier);
         result.setResultStatus(true);
     }
 

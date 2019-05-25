@@ -16,7 +16,7 @@ public enum ErrorCode
 		DEVICE_TYPE_NOT_EXIST("30101", "该类型不存在"),
 		DEVICE_TYPE_NAME_HAS_BEEN_USED("30102", "该类型名称已被使用"),
 
-		DEVICE_MODEL_NOT_EXIST("30201", "该型号不存在"),
+		DEVICE_MODEL_NOT_EXIST("30201", "该型号不存在!"),
 		DEVICE_MODEL_NAME_HAS_BEEN_USED("30202", "该型号名称已被使用"),
 
 		DEVICE_NOT_EXIST("30301", "该设备不存在"),
