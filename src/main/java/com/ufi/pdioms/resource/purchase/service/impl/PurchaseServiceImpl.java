@@ -35,14 +35,16 @@ public class PurchaseServiceImpl implements PurchaseService
      * @param pageNo       分页起始页
      * @param pageSize     分页页大小
      * @param search 条件搜索的采购记录型号
+     * @param beginTime 开始时间
+     * @param endTime 结束时间
      * @return 返回搜索结果集
      */
     @Override
-    public PageResult getPurchaseInfo(Integer pageNo, Integer pageSize,String search)
+    public PageResult getPurchaseInfo(Integer pageNo, Integer pageSize, String search, String beginTime, String endTime)
     {
         PageHelper.startPage(pageNo,pageSize); //分页参数设置
         //判断搜索参数不等于空或者不等于空字符
-        if (StringUtil.isEmpty(search)) {
+        if (StringUtil.isEmpty(search) & StringUtil.isEmpty(beginTime) & StringUtil.isEmpty(endTime)) {
             Example example = new Example(Purchase.class);
             example.createCriteria().andEqualTo("isDelete",0);
             List<Purchase> purchases = purchaseDao.selectByExample(example);
@@ -50,6 +52,7 @@ public class PurchaseServiceImpl implements PurchaseService
             PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
             return result;
         }
+
         //采购记录搜索条件查询《不》等于空的情况下，进行搜索分页查询
         Example example = new Example(Purchase.class);
         Example.Criteria criteria = example.createCriteria();
@@ -59,8 +62,28 @@ public class PurchaseServiceImpl implements PurchaseService
         List<Purchase> purchases = purchaseDao.selectByExample(example);
         PageInfo<Purchase> pageInfo = new PageInfo<>(purchases);
         PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
+        if(!search.equals("")) return result;
+
+        if (!beginTime.equals("") & !endTime.equals("")){ //在筛选时间不等于空的情况下，进行时间筛选搜索数据
+            List<Purchase> dataByDate = findDataByDate(beginTime, endTime);
+            PageInfo<Purchase> dateInfo = new PageInfo<>(dataByDate);
+            PageResult result1 = new PageResult(dateInfo.getTotal(), dateInfo.getList(), dateInfo.getPages(), dateInfo.getSize(), dateInfo.getPageNum());
+            return result1;
+        }
         return result;
     }
+
+    /**
+     *      按照时间日期进行筛选数据信息
+     * @param beginTime  开始时间
+     * @param endTime   结束时间
+     * @return  返回查询结果集
+     */
+    private List<Purchase> findDataByDate(String beginTime, String endTime) {
+        List<Purchase> purchaseList = purchaseDao.searchDataByDate(beginTime, endTime);
+        return purchaseList;
+    }
+
     /****这个是判断搜索中是对应那个字段进行条件筛选的****/
     private String searchIf(String search)
     {

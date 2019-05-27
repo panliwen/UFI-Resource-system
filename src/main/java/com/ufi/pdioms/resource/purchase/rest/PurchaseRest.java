@@ -59,11 +59,13 @@ public class PurchaseRest
     @GetMapping("/purchase")
     public GeneralResult getPurchaseInfo(  @RequestParam(value="pageNo", required=false, defaultValue="1") Integer pageNo,
                                            @RequestParam(value="pageSize", required=false, defaultValue="20") Integer pageSize,
-                                           @RequestParam(value="search", required=false, defaultValue="") String search
+                                           @RequestParam(value="search", required=false, defaultValue="") String search,
+                                           @RequestParam(value="beginTime", required=false, defaultValue="") String beginTime,
+                                           @RequestParam(value="endTime", required=false, defaultValue="") String endTime
                                             )
     {
         GeneralResult result = new GeneralResult();
-        result.setResultData(purchaseService.getPurchaseInfo(pageNo, pageSize,search));
+        result.setResultData(purchaseService.getPurchaseInfo(pageNo, pageSize,search,beginTime,endTime));
         return result;
     }
 

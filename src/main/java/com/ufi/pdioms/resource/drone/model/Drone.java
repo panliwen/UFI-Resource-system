@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Table(name = "tb_device_drone")
 public class Drone implements Serializable
 {
+    private static final long serialVersionUID = 3660009371337848373L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

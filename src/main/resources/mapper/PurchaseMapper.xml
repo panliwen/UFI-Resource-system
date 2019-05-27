@@ -10,5 +10,14 @@
           SELECT COUNT(*) from tb_purchase where supplier=#{search}
     </select>
 
+    <select id="searchDataByDate" resultType="com.ufi.pdioms.resource.purchase.model.Purchase">
+        select * from
+        tb_purchase
+        where
+        purchaseTime >=#{beginTime}
+        and
+        purchaseTime &lt;= #{endTime}
+    </select>
+
 
 </mapper>

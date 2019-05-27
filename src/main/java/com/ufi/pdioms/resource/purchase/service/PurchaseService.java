@@ -17,7 +17,7 @@ public interface PurchaseService
      * @param search  条件搜索的采购记录型号
      * @return  返回搜索结果集
      */
-    PageResult getPurchaseInfo(Integer pageNo, Integer pageSize,String search);
+    PageResult getPurchaseInfo(Integer pageNo, Integer pageSize, String search, String beginTime,String endTime);
 
     /**
      * 新增采购记录信息
