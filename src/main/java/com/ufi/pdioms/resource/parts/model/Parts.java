@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 厂家实体类
  */
 @Data
-@Table(name = "tb_parts")
+@Table(name = "resource_parts")
 public class Parts implements Serializable
 {
     @Id
@@ -26,7 +26,7 @@ public class Parts implements Serializable
     @Column(name = "status")
     private Integer status;
 
-    @Column(name = "isDelete")
+    @Column(name = "is_delete")
     private Integer isDelete;
 
     private Purchase purchase;

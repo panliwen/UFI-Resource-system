@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 厂家实体类
  */
 @Data
-@Table(name = "tb_manufacturer")
+@Table(name = "resource_manufacturer")
 public class Manufacturer implements Serializable
 {
     @Id

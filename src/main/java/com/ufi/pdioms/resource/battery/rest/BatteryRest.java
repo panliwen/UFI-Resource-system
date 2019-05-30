@@ -15,7 +15,7 @@ import javax.validation.Valid;
  * 电池映射接口
  */
 @RestController
-@RequestMapping("/resource")
+@RequestMapping("/resource/mgt")
 public class BatteryRest
 {
     private static final Logger LOGGER= LoggerFactory.getLogger(BatteryRest.class);
@@ -24,7 +24,7 @@ public class BatteryRest
     private BatteryService batteryService;
 
     //新增电池信息录入
-    @PostMapping("/battery/add")
+    @PostMapping("/battery")
     public GeneralResult addBatteryInfo(@Valid @RequestBody Battery battery)
     {
         LOGGER.info("new battery info param:{}", JsonUtils.obj2json(battery));

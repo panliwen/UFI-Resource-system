@@ -49,7 +49,7 @@ public class PurchaseServiceImpl implements PurchaseService
             example.createCriteria().andEqualTo("isDelete",0);
             List<Purchase> purchases = purchaseDao.selectByExample(example);
             PageInfo<Purchase> pageInfo = new PageInfo<>(purchases);
-            PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
+            PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum(), pageInfo.getList());
             return result;
         }
 
@@ -61,13 +61,13 @@ public class PurchaseServiceImpl implements PurchaseService
 
         List<Purchase> purchases = purchaseDao.selectByExample(example);
         PageInfo<Purchase> pageInfo = new PageInfo<>(purchases);
-        PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
+        PageResult result = new PageResult(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
         if(!search.equals("")) return result;
 
         if (!beginTime.equals("") & !endTime.equals("")){ //在筛选时间不等于空的情况下，进行时间筛选搜索数据
             List<Purchase> dataByDate = findDataByDate(beginTime, endTime);
             PageInfo<Purchase> dateInfo = new PageInfo<>(dataByDate);
-            PageResult result1 = new PageResult(dateInfo.getTotal(), dateInfo.getList(), dateInfo.getPages(), dateInfo.getSize(), dateInfo.getPageNum());
+            PageResult result1 = new PageResult(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
             return result1;
         }
         return result;
@@ -132,7 +132,6 @@ public class PurchaseServiceImpl implements PurchaseService
     {
         Purchase purchase= new Purchase();
         purchase.setId(purchaseId);
-        purchase.setIsDelete(1);
         purchaseDao.updateByPrimaryKeySelective(purchase);
         result.setResultStatus(true);
     }

@@ -44,7 +44,7 @@ public class ModelServiceImpl implements ModelService
             example.createCriteria().andEqualTo("isDelete",0);
             List<Model> models = modelDao.selectByExample(example);
             PageInfo<Model> pageInfo = new PageInfo<>(models);
-            PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
+            PageResult result = new PageResult(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
             return result;
         }
         //设备型号搜索条件查询《不》等于空的情况下，进行搜索分页查询
@@ -57,7 +57,7 @@ public class ModelServiceImpl implements ModelService
 
         List<Model> models = modelDao.selectByExample(example);
         PageInfo<Model> pageInfo = new PageInfo<>(models);
-        PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
+        PageResult result = new PageResult(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
         return result;
     }
 
@@ -77,7 +77,7 @@ public class ModelServiceImpl implements ModelService
         List<Model> models = modelDao.selectByExample(example);
         for (Model model1 : models) {
             if (model.getModel().equals(model1.getModel())){
-                result.setErr(ErrorCode.DEVICE_MODEL_NOT_EXIST);
+                result.setErr(ErrorCode.DEVICE_MODEL_NAME_HAS_BEEN_USED);
                 return;
             }
         }

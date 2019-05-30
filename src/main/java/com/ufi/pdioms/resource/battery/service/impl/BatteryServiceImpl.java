@@ -56,7 +56,7 @@ public class BatteryServiceImpl implements BatteryService
             example.createCriteria().andEqualTo("isDelete",0);
             List<Battery> batterys = batteryDao.selectByExample(example);
             PageInfo<Battery> pageInfo = new PageInfo<>(batterys);
-            PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
+            PageResult result = new PageResult(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
             return result;
         }
         //电池搜索条件查询《不》等于空的情况下，进行搜索分页查询
@@ -71,7 +71,7 @@ public class BatteryServiceImpl implements BatteryService
 
         List<Battery> batterys = batteryDao.selectByExample(example);
         PageInfo<Battery> pageInfo = new PageInfo<>(batterys);
-        PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
+        PageResult result = new PageResult(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
         return result;
     }
     /****这个是判断搜索中是对应那个字段进行条件筛选的****/

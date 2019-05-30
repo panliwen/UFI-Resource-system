@@ -20,6 +20,12 @@ spring:
       min-idle: 0
       max-wait: -1
     timeout: 0
+  pool:
+    #从池中借出的对象的最大数目
+    max-total: 153
+    max-wait-millis: 102
+    jmx-name-base: 1
+    jmx-name-prefix: 1
 logging:
   level:
     com.ufi.pdioms.resource.dao: DEBUG

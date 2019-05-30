@@ -43,7 +43,7 @@ public class ManufacturerServiceImpl implements ManufacturerService
             example.createCriteria().andEqualTo("isDelete",0);
             List<Manufacturer> manufacturers = manufacturerDao.selectByExample(example);
             PageInfo<Manufacturer> pageInfo = new PageInfo<>(manufacturers);
-            PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
+            PageResult result = new PageResult(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
             return result;
         }
         //厂家搜索名称《不》等于空的情况下，进行搜索分页查询
@@ -52,7 +52,7 @@ public class ManufacturerServiceImpl implements ManufacturerService
         example.createCriteria().andEqualTo("isDelete",0);
         List<Manufacturer> manufacturers = manufacturerDao.selectByExample(example);
         PageInfo<Manufacturer> pageInfo = new PageInfo<>(manufacturers);
-        PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
+        PageResult result = new PageResult(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
         return result;
     }
 

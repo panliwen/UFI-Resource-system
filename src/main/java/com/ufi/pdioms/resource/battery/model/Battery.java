@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 厂家实体类
  */
 @Data
-@Table(name = "tb_battery")
+@Table(name = "resource_battery")
 public class Battery implements Serializable
 {
     @Id
@@ -26,7 +26,7 @@ public class Battery implements Serializable
     @Column(name = "status")
     private Integer status;
 
-    @Column(name = "isDelete")
+    @Column(name = "is_delete")
     private long isDelete;
 
     private Purchase purchase;
@@ -111,10 +111,6 @@ public class Battery implements Serializable
         this.status = status;
     }
 
-    public long getIsDelete() {
-        return isDelete;
-    }
-
     public void setIsDelete(long isDelete) {
         this.isDelete = isDelete;
     }
@@ -132,7 +128,6 @@ public class Battery implements Serializable
                 ", supplier='" + supplier + '\'' +
                 ", manufacturer='" + manufacturer + '\'' +
                 ", status=" + status +
-                ", isDelete=" + isDelete +
                 ", purchase=" + purchase +
                 '}';
     }

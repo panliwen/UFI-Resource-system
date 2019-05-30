@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PageResult implements Serializable {
     //当前页
-    private long current;
+    private long pageNo;
 
     //页面大小，数据的存放数量
     private long pageSize;
@@ -14,17 +14,17 @@ public class PageResult implements Serializable {
     private long total;
 
     //总页数
-    private long totalPage;
+    private long pages;
 
     //列表；占位符，如果赋值以后是不可以修改其里面的值的
     private List<?> data;
 
-    public long getCurrent() {
-        return current;
+    public long getPageNo() {
+        return pageNo;
     }
 
-    public void setCurrent(long current) {
-        this.current = current;
+    public void setPageNo(long pageNo) {
+        this.pageNo = pageNo;
     }
 
     public long getPageSize() {
@@ -35,20 +35,20 @@ public class PageResult implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public long getTotalPage() {
-        return totalPage;
+    public long getTotal() {
+        return total;
     }
 
-    public void setTotalPage(long totalPage) {
-        this.totalPage = totalPage;
-    }
-
-    public PageResult(long total, List<?> data, long totalPage, long pageSize, long current) {
-        this.data = data;
+    public void setTotal(long total) {
         this.total = total;
-        this.totalPage=totalPage;
-        this.pageSize=pageSize;
-        this.current=current;
+    }
+
+    public long getPages() {
+        return pages;
+    }
+
+    public void setPages(long pages) {
+        this.pages = pages;
     }
 
     public List<?> getData() {
@@ -59,12 +59,11 @@ public class PageResult implements Serializable {
         this.data = data;
     }
 
-    public long getTotal() {
-        return total;
-    }
-
-    public void setTotal(long total) {
+    public PageResult(long pageNo, long pageSize, long total, long pages, List<?> data) {
+        this.pageNo = pageNo;
+        this.pageSize = pageSize;
         this.total = total;
+        this.pages = pages;
+        this.data = data;
     }
-
 }

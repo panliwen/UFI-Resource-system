@@ -141,7 +141,7 @@ public abstract class BaseServiceImpl<T, M extends Mapper<T>> implements BaseSer
         List<T> list = mapper.selectAll();
         //创建分页信息对象
         PageInfo<T> pageInfo = new PageInfo<>(list);
-        return new PageResult(pageInfo.getTotal(), pageInfo.getList(),pageInfo.getPages(),pageInfo.getPageSize(),pageInfo.getPrePage());
+        return new PageResult(pageInfo.getTotal(),pageInfo.getPages(),pageInfo.getPageSize(),pageInfo.getPrePage(), pageInfo.getList());
     }
 
     @Override
@@ -152,7 +152,7 @@ public abstract class BaseServiceImpl<T, M extends Mapper<T>> implements BaseSer
         List<T> list = mapper.select(t);
         //创建分页信息对象
         PageInfo<T> pageInfo = new PageInfo<>(list);
-        return new PageResult(pageInfo.getTotal(), pageInfo.getList(),pageInfo.getPages(),pageInfo.getPageSize(),pageInfo.getPrePage());
+        return new PageResult(pageInfo.getTotal(),pageInfo.getPages(),pageInfo.getPageSize(),pageInfo.getPrePage(), pageInfo.getList());
     }
 
 }

@@ -15,7 +15,7 @@ import javax.validation.Valid;
  * 配件映射接口
  */
 @RestController
-@RequestMapping("/resource")
+@RequestMapping("/resource/mgt")
 public class PartsRest
 {
     private static final Logger LOGGER= LoggerFactory.getLogger(PartsRest.class);
@@ -24,7 +24,7 @@ public class PartsRest
     private PartsService partsService;
 
     //新增配件信息录入
-    @PostMapping("/parts/add")
+    @PostMapping("/parts")
     public GeneralResult addPartsInfo(@Valid @RequestBody Parts parts)
     {
         LOGGER.info("new parts info param:{}", JsonUtils.obj2json(parts));

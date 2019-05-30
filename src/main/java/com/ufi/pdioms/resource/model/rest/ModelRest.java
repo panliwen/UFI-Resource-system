@@ -15,7 +15,7 @@ import javax.validation.Valid;
  * 设备型号映射接口
  */
 @RestController
-@RequestMapping("/resource")
+@RequestMapping("/resource/mgt")
 public class ModelRest
 {
     private static final Logger LOGGER= LoggerFactory.getLogger(ModelRest.class);
@@ -24,7 +24,7 @@ public class ModelRest
     private ModelService modelService;
 
     //新增设备型号信息录入
-    @PostMapping("/model/add")
+    @PostMapping("/model")
     public GeneralResult addModelInfo(@Valid @RequestBody Model model)
     {
         LOGGER.info("new model info param:{}", JsonUtils.obj2json(model));

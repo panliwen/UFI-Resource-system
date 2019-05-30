@@ -13,7 +13,7 @@ import java.util.List;
  * 采购信息实体类
  */
 @Data
-@Table(name = "tb_purchase")
+@Table(name = "resource_purchase")
 public class Purchase implements Serializable
 {
     @Id
@@ -27,8 +27,6 @@ public class Purchase implements Serializable
     private String supplier;
     private String remarks;
 
-    @Column(name = "isDelete")
-    private Integer isDelete;
 
     //实体对象引用
     private List<PurchaseDetails> detailsList;
@@ -82,13 +80,7 @@ public class Purchase implements Serializable
         this.remarks = remarks;
     }
 
-    public Integer getIsDelete() {
-        return isDelete;
-    }
 
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
-    }
 
     @Override
     public String toString() {
@@ -99,7 +91,6 @@ public class Purchase implements Serializable
                 ", purchase='" + purchase + '\'' +
                 ", supplier='" + supplier + '\'' +
                 ", remarks='" + remarks + '\'' +
-                ", isDelete=" + isDelete +
                 '}';
     }
 }

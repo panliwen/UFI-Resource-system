@@ -11,10 +11,13 @@ import com.ufi.pdioms.resource.common.model.PageResult;
 public interface DroneService
 {
     /**
-     *获得无人机所有列表信息
+     *     获得无人机所有列表信息
      * @param pageNo  分页起始页
      * @param pageSize  分页页大小
      * @param model  条件搜索的无人机型号
+     * @param status  无人机状态
+     * @param manufacturer 厂家名称
+     * @param supplier  供应商名称
      * @return  返回搜索结果集
      */
     PageResult getDroneInfo(Integer pageNo, Integer pageSize, String model, String search, Integer status, String manufacturer, String supplier);

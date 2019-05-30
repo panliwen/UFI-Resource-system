@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 采购信息带《详情》实体类
  */
 @Data
-@Table(name = "tb_purchase_details")
+@Table(name = "resource_purchase_details")
 public class PurchaseDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class PurchaseDetails implements Serializable {
     private Long parentId;
     private String sn;
     private String number;
-    private String category;
+    private String typeName;
     private String model;
 
     public Long getId() {
@@ -54,11 +54,11 @@ public class PurchaseDetails implements Serializable {
     }
 
     public String getCategory() {
-        return category;
+        return typeName;
     }
 
     public void setCategory(String category) {
-        this.category = category;
+        this.typeName = category;
     }
 
     public String getModel() {
@@ -76,7 +76,7 @@ public class PurchaseDetails implements Serializable {
                 ", parentId=" + parentId +
                 ", sn='" + sn + '\'' +
                 ", number='" + number + '\'' +
-                ", category='" + category + '\'' +
+                ", category='" + typeName + '\'' +
                 ", model='" + model + '\'' +
                 '}';
     }

@@ -37,14 +37,15 @@ public class DroneServiceImpl implements DroneService
     @Autowired
     private PurchaseDetailsDao purchaseDetailsDao; //采购详情信息
 
-
     /**
-     * 获得设备无人机所有列表信息
-     *
-     * @param pageNo       分页起始页
-     * @param pageSize     分页页大小
-     * @param model 条件搜索的设备无人机型号
-     * @return 返回搜索结果集
+     *     获得无人机所有列表信息
+     * @param pageNo  分页起始页
+     * @param pageSize  分页页大小
+     * @param model  条件搜索的无人机型号
+     * @param status  无人机状态
+     * @param manufacturer 厂家名称
+     * @param supplier  供应商名称
+     * @return  返回搜索结果集
      */
     @Override
     public PageResult getDroneInfo(Integer pageNo, Integer pageSize, String model,String search,Integer status,String manufacturer,String supplier)
@@ -56,7 +57,7 @@ public class DroneServiceImpl implements DroneService
             example.createCriteria().andEqualTo("isDelete",0);
             List<Drone> drones = droneDao.selectByExample(example);
             PageInfo<Drone> pageInfo = new PageInfo<>(drones);
-            PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
+            PageResult result = new PageResult(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
             return result;
         }
         //设备无人机搜索条件查询《不》等于空的情况下，进行搜索分页查询
@@ -71,7 +72,7 @@ public class DroneServiceImpl implements DroneService
 
         List<Drone> drones = droneDao.selectByExample(example);
         PageInfo<Drone> pageInfo = new PageInfo<>(drones);
-        PageResult result = new PageResult(pageInfo.getTotal(), pageInfo.getList(), pageInfo.getPages(), pageInfo.getSize(), pageInfo.getPageNum());
+        PageResult result = new PageResult(pageInfo.getPageNum(), pageInfo.getPageSize(), pageInfo.getTotal(), pageInfo.getPages(), pageInfo.getList());
         return result;
     }
     /****这个是判断搜索中是对应那个字段进行条件筛选的****/

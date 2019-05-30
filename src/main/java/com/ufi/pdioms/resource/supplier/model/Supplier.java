@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 厂家实体类
  */
 @Data
-@Table(name = "tb_supplier")
+@Table(name = "resource_supplier")
 public class Supplier implements Serializable
 {
     @Id
@@ -20,7 +20,7 @@ public class Supplier implements Serializable
     private String phone;
     private String remarks;
 
-    @Column(name = "isDelete")
+    @Column(name = "is_delete")
     private Integer isDelete;
 
     public Long getId() {

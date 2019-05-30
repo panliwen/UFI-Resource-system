@@ -29,7 +29,7 @@ public class Drone implements Serializable
     @Column(name = "isSuit")
     private Integer isSuit; //是否是套装系列
 
-    @Column(name = "isDelete")
+    @Column(name = "is_delete")
     private long isDelete;
     private Purchase purchase;
 

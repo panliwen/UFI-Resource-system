@@ -11,6 +11,12 @@ public class ResourceApplicationTests {
 
     @Test
     public void contextLoads() {
+        String fileOriginName= "我是图片dfdf5";
+        String str= "kk55";
+        System.out.println(new String("helloWord ").getBytes());
+
+        String suffix = fileOriginName.substring(fileOriginName.lastIndexOf(".") +1);
+        System.out.println(suffix);
     }
 
 }
